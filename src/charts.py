@@ -49,6 +49,30 @@ def radar_mock_go(show_all: bool = False) -> None:
     fig.show()
 
 
+def pp_mock_go() -> None:
+    data = Path("../data/data.csv").resolve()
+    df = read_data(data)
+
+    qs = df["Question_text"].unique().tolist()
+    df["aux"] = df.groupby("Question_text").cumcount()
+    df = df.pivot(index="aux", columns="Question_text", values="Answer")
+
+    dims = [dict(range=[0, 3], label=v, values=df[v]) for v in qs]
+
+    # Missing a column with the company names; it should be used instead of the index for coloring and labelling.
+    fig = go.Figure(data=go.Parcoords(
+        line=dict(color=df.index,
+                  colorscale=[[0, 'purple'], [0.5, 'lightseagreen'], [1, 'gold']]),
+        dimensions=dims))
+
+    fig.update_layout(
+        plot_bgcolor='white',
+        paper_bgcolor='white'
+    )
+
+    fig.show()
+
+
 def read_data(csv_file: Path, company: str = None) -> pd.DataFrame:
     df = pd.read_csv(csv_file)
     if company:
@@ -57,4 +81,5 @@ def read_data(csv_file: Path, company: str = None) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    radar_mock_go(show_all=False)
+    # radar_mock_go(show_all=False)
+    pp_mock_go()

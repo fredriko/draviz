@@ -41,6 +41,7 @@ visualizations.
   - https://www.data-to-viz.com/caveat/spider.html (**READ THIS**)
 * Parallel coordinate plot
   - https://www.python-graph-gallery.com/parallel-plot/
+  - https://plotly.com/python/parallel-coordinates-plot/
     
 ### Examples
 Below are example radar charts generated from the mock data using [src/charts.py](src/charts.py). The first graph 
@@ -49,3 +50,7 @@ shows the answers for a single company, while the second graph fits two companie
 ![Radar chart - single company](images/radar_chart_single.png)
 
 ![Radar chart - two companies](images/radar_chart_multiple.png)
+
+Here is an example of a parallel plot based on the same data
+
+![Parallel plot - two companies](images/parallel_plot_multiple.png)
