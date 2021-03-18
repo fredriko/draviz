@@ -1,25 +1,31 @@
-Company, Question, Answer
-Acme,1,1
-Acme,2,2
-Acme,3,3
-Acme,4,2
-Acme,5,0
-Acme,6,2
-Acme,7,3
-Acme,8,0
-Acme,9,1
-Acme,10,2
-Acme,11,2
-Acme,12,2
-Skunk Works,1,3
-Skunk Works,2,3
-Skunk Works,3,3
-Skunk Works,4,3
-Skunk Works,5,3
-Skunk Works,6,0
-Skunk Works,7,1
-Skunk Works,8,1
-Skunk Works,9,2
-Skunk Works,10,2
-Skunk Works,11,3
-Skunk Works,12,2
+Company,Question,Question_text,Answer
+Acme,q1,Programmatic access,3
+Acme,q2,Licences,2
+Acme,q3,Lawful access,3
+Acme,q4,Ethics assessment,1
+Acme,q5,Converted,2
+Acme,q6,Characteristics known,3
+Acme,q7,Validated,2
+Acme,q8,Agree on business need,2
+Acme,q9,Purpose clear,2
+Acme,q10,Sufficient data,1
+Acme,q11,Evaluation,3
+Acme,q12,Data aqcuisition,3
+Acme,q13,Data secured,2
+Acme,q14,Risk free sharing,1
+Acme,q15,Allowed to share,3
+Skunk Works,q1,Programmatic access,3
+Skunk Works,q2,Licences,3
+Skunk Works,q3,Lawful access,3
+Skunk Works,q4,Ethics assessment,3
+Skunk Works,q5,Converted,3
+Skunk Works,q6,Characteristics known,3
+Skunk Works,q7,Validated,3
+Skunk Works,q8,Agree on business need,2
+Skunk Works,q9,Purpose clear,3
+Skunk Works,q10,Sufficient data,2
+Skunk Works,q11,Evaluation,3
+Skunk Works,q12,Data aqcuisition,1
+Skunk Works,q13,Data secured,3
+Skunk Works,q14,Risk free sharing,2
+Skunk Works,q15,Allowed to share,2

@@ -43,4 +43,9 @@ visualizations.
   - https://www.python-graph-gallery.com/parallel-plot/
     
 ### Examples
+Below are example radar charts generated from the mock data using [src/charts.py](src/charts.py). The first graph 
+shows the answers for a single company, while the second graph fits two companies in the same graph.
 
+![Radar chart - single company](images/radar_chart_single.png)
+
+![Radar chart - two companies](images/radar_chart_multiple.png)
