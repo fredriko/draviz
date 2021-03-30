@@ -1,40 +1,39 @@
 from pathlib import Path
+from typing import List
 
 import pandas as pd
-import plotly.express as px
 import plotly.graph_objects as go
 
-
-def radar_mock_px() -> None:
-    data = Path("../data/data.csv").resolve()
-    df = read_data(data, company="Acme")
-    fig = px.line_polar(df, r='Answer', theta='Question', line_close=True)
-    fig.update_traces(fill='toself')
-    fig.show()
+"""
+TODO
+ * Sort on q<NUM> to have questions listed in order (both plot types)
+ * Have numeric values on radial axis be labels indicating "yes", "no", etc. instead. (radar plot)
+"""
 
 
-def radar_mock_go(show_all: bool = False) -> None:
-    data = Path("../data/data.csv").resolve()
-    df = read_data(data)
-    categories = df["Question_text"].unique().tolist()
-    acme_values = df.loc[df["Company"] == "Acme", "Answer"].values
-    skunk_values = df.loc[df["Company"] == "Skunk Works", "Answer"].values
-    print(skunk_values)
+def create_radar_plot(data_file: Path, company_names: List[str], language: str = "en",
+                      enumerate_questions: bool = True) -> None:
+    df = read_data(data_file, language=language)
+    question_column = "Question_text"
+    if enumerate_questions:
+        question_column = "Question_text_enum"
+
+    categories = df[question_column].unique().tolist()
+
+    answers_per_company: List[List[str]] = []
+
+    for company_name in company_names:
+        company_answers = df.loc[df["Company"] == company_name, "Answer"].values
+        answers_per_company.append(company_answers)
+
     fig = go.Figure()
 
-    fig.add_trace(go.Scatterpolar(
-        r=acme_values,
-        theta=categories,
-        fill="toself",
-        name="Acme"
-    ))
-
-    if show_all:
+    for index, answers in enumerate(answers_per_company):
         fig.add_trace(go.Scatterpolar(
-            r=skunk_values,
+            r=answers,
             theta=categories,
             fill="toself",
-            name="Skunk Works"
+            name=company_names[index]
         ))
 
     fig.update_layout(
@@ -49,13 +48,16 @@ def radar_mock_go(show_all: bool = False) -> None:
     fig.show()
 
 
-def pp_mock_go() -> None:
-    data = Path("../data/data.csv").resolve()
-    df = read_data(data)
+def create_parallel_plot(data_file: Path, language: str = "en", enumerate_questions: bool = True) -> None:
+    df = read_data(data_file, language=language)
 
-    qs = df["Question_text"].unique().tolist()
-    df["aux"] = df.groupby("Question_text").cumcount()
-    df = df.pivot(index="aux", columns="Question_text", values="Answer")
+    question_column = "Question_text"
+    if enumerate_questions:
+        question_column = "Question_text_enum"
+
+    qs = df[question_column].unique().tolist()
+    df["aux"] = df.groupby(question_column).cumcount()
+    df = df.pivot(index="aux", columns=question_column, values="Answer")
 
     dims = [dict(range=[0, 3], label=v, values=df[v]) for v in qs]
 
@@ -73,13 +75,19 @@ def pp_mock_go() -> None:
     fig.show()
 
 
-def read_data(csv_file: Path, company: str = None) -> pd.DataFrame:
+def read_data(csv_file: Path, company: str = None, language: str = "en") -> pd.DataFrame:
     df = pd.read_csv(csv_file)
+    df_questions = pd.read_csv(Path(f"../data/questions_{language}.csv"))
+    df = df[df["Applicable"] != False]
     if company:
         df = df[df["Company"] == company]
+    df = pd.merge(df, df_questions, how="inner", on="Question")
+    df["Question_text_enum"] = df['Question'].astype(str) + ": " + df['Question_text']
     return df
 
 
 if __name__ == "__main__":
-    # radar_mock_go(show_all=False)
-    pp_mock_go()
+    data_file = Path("../data/data-nv.csv")
+    language = "sv"
+    company_names = ["NV start", "NV mid"]
+    create_radar_plot(data_file, company_names, language=language, enumerate_questions=True)

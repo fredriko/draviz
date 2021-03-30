@@ -54,3 +54,7 @@ shows the answers for a single company, while the second graph fits two companie
 Here is an example of a parallel plot based on the same data
 
 ![Parallel plot - two companies](images/parallel_plot_multiple.png)
+
+## TODO
+
+* Weigh questions differently, depending on how important they are (or where in the process the current project is).
