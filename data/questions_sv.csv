@@ -1,16 +1,16 @@
 Question,Question_text
 1,Programmatisk åtkomst
-2,Licenser
+2,Licenser i ordning
 3,Laglig rätt till åtkomst
-4,Etikprövad
-5,Konverterad
+4,Etikprövad data
+5,Konverterad till lämpligt format
 6,Känd karaktäristik
 7,Validerad data
-8,Överens om affärsbehov
+8,Parter överens om affärsbehov
 9,Syftet med data klart
-10,Tillräcklig data
-11,Utvärdering
-12,Datainsamling
-13,Data säkrad
+10,Tillräckligt med data
+11,Utvärdering av lösning klar
+12,Organisationen hanterar datainsamling över tid
+13,Datasäkerhet hanterad
 14,Riskfri delning av data
 15,Tillåten att dela data

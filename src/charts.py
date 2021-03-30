@@ -1,55 +1,62 @@
+from collections import OrderedDict
 from pathlib import Path
-from typing import List
+from typing import List, Dict, Tuple
 
 import pandas as pd
 import plotly.graph_objects as go
 
-"""
-TODO
- * Sort on q<NUM> to have questions listed in order (both plot types)
- * Have numeric values on radial axis be labels indicating "yes", "no", etc. instead. (radar plot)
-"""
+
+def get_answer_string(answer: int, answer_map: Dict[int, str]) -> str:
+    return answer_map.get(answer, "Undefined")
 
 
 def create_radar_plot(data_file: Path, company_names: List[str], language: str = "en",
                       enumerate_questions: bool = True) -> None:
-    df = read_data(data_file, language=language)
+    df, answers_list = read_data(data_file, language=language)
     question_column = "Question_text"
     if enumerate_questions:
         question_column = "Question_text_enum"
 
     categories = df[question_column].unique().tolist()
 
-    answers_per_company: List[List[str]] = []
+    answers_per_company: List[Tuple[List[str], List[str]]] = []
 
     for company_name in company_names:
-        company_answers = df.loc[df["Company"] == company_name, "Answer"].values
-        answers_per_company.append(company_answers)
+        company_answers_int = df.loc[df["Company"] == company_name, "Answer"].values
+        company_answers_str = df.loc[df["Company"] == company_name, "Answer_text"].values
+        answers_per_company.append((company_answers_int, company_answers_str))
 
     fig = go.Figure()
 
     for index, answers in enumerate(answers_per_company):
         fig.add_trace(go.Scatterpolar(
-            r=answers,
+            r=answers[0],
             theta=categories,
             fill="toself",
-            name=company_names[index]
+            name=company_names[index],
+            text=answers[1],
+            hoverinfo="text"
         ))
 
     fig.update_layout(
         polar=dict(
             radialaxis=dict(
                 visible=True,
-                range=[0, 3]
+                tickmode="array",
+                tickvals=[0, 1, 2, 3],
+                ticktext=answers_list
+            ),
+            angularaxis=dict(
+                direction="clockwise"
             )
         ),
-        showlegend=False
+        showlegend=True
     )
     fig.show()
 
 
 def create_parallel_plot(data_file: Path, language: str = "en", enumerate_questions: bool = True) -> None:
-    df = read_data(data_file, language=language)
+    df, answers_list = read_data(data_file, language=language)
 
     question_column = "Question_text"
     if enumerate_questions:
@@ -75,19 +82,37 @@ def create_parallel_plot(data_file: Path, language: str = "en", enumerate_questi
     fig.show()
 
 
-def read_data(csv_file: Path, company: str = None, language: str = "en") -> pd.DataFrame:
+def read_data(csv_file: Path, company: str = None, language: str = "en") -> Tuple[pd.DataFrame, List[str]]:
     df = pd.read_csv(csv_file)
     df_questions = pd.read_csv(Path(f"../data/questions_{language}.csv"))
     df = df[df["Applicable"] != False]
     if company:
         df = df[df["Company"] == company]
     df = pd.merge(df, df_questions, how="inner", on="Question")
-    df["Question_text_enum"] = df['Question'].astype(str) + ": " + df['Question_text']
-    return df
+    df["Question_text_enum"] = df["Question"].astype(str) + ": " + df["Question_text"]
+
+    dd = OrderedDict()
+    if language == "en":
+        dd: Dict[int, str] = {
+            0: "Don't know",
+            1: "No",
+            2: "Partially",
+            3: "Yes"
+        }
+    else:
+        dd: Dict[int, str] = {
+            0: "Vet inte",
+            1: "Nej",
+            2: "Delvis",
+            3: "Ja"
+        }
+    df["Answer_text"] = df["Answer"].apply(lambda x: dd.get(x, "Undefined"))
+    return df, list(dd.values())
 
 
 if __name__ == "__main__":
     data_file = Path("../data/data-nv.csv")
     language = "sv"
-    company_names = ["NV start", "NV mid"]
+    company_names = ["Projektstart"]
     create_radar_plot(data_file, company_names, language=language, enumerate_questions=True)
+    #create_parallel_plot(data_file, language=language)
