@@ -50,9 +50,20 @@ def create_radar_plot(data_file: Path, company_names: List[str], language: str =
                 direction="clockwise"
             )
         ),
-        showlegend=True
+        showlegend=False,
+        font=dict(size=24)
     )
-    fig.show()
+
+    config = {
+        'toImageButtonOptions': {
+            'format': 'png',  # one of png, svg, jpeg, webp
+            'filename': 'custom_image',
+            'height': 1000,
+            'width': 1800,
+            'scale': 1,  # Multiply title/legend/axis/canvas sizes by this factor,
+        }
+    }
+    fig.show(config=config)
 
 
 def create_parallel_plot(data_file: Path, language: str = "en", enumerate_questions: bool = True) -> None:
@@ -113,6 +124,8 @@ def read_data(csv_file: Path, company: str = None, language: str = "en") -> Tupl
 if __name__ == "__main__":
     data_file = Path("../data/data-nv.csv")
     language = "sv"
-    company_names = ["Projektstart"]
+    #company_names = ["Projektstart"]
+    #company_names = ["Mitten av projektet"]
+    company_names = ["Projektstart", "Mitten av projektet"]
     create_radar_plot(data_file, company_names, language=language, enumerate_questions=True)
     #create_parallel_plot(data_file, language=language)
