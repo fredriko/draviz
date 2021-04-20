@@ -44,7 +44,8 @@ def create_radar_plot(data_file: Path, company_names: List[str], language: str =
                 visible=True,
                 tickmode="array",
                 tickvals=[0, 1, 2, 3],
-                ticktext=answers_list
+                ticktext=answers_list,
+                range=[0,3]
             ),
             angularaxis=dict(
                 direction="clockwise"
@@ -122,10 +123,12 @@ def read_data(csv_file: Path, company: str = None, language: str = "en") -> Tupl
 
 
 if __name__ == "__main__":
-    data_file = Path("../data/data-nv.csv")
-    language = "sv"
+    #data_file = Path("../data/data-nv.csv")
+    data_file = Path("../data/data.csv")
+    language = "en"
     #company_names = ["Projektstart"]
     #company_names = ["Mitten av projektet"]
-    company_names = ["Projektstart", "Mitten av projektet"]
+    #company_names = ["Projektstart", "Mitten av projektet"]
+    company_names = ["Acme"]
     create_radar_plot(data_file, company_names, language=language, enumerate_questions=True)
     #create_parallel_plot(data_file, language=language)

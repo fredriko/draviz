@@ -1,16 +1,16 @@
 Question,Question_text
-1,Programmatic access
-2,Licenses
-3,Lawful access
-4,Ethics assessment
-5,Converted
+1,Programmatic access to data
+2,Licenses in order
+3,Lawful access to data
+4,Ethics assessment of the data
+5,Converted to suitable format
 6,Characteristics known
-7,Validated
-8,Agree on business need
-9,Purpose clear
-10,Sufficient data
-11,Evaluation
-12,Data acquisition
+7,Validated data
+8,Stakeholders agree on business need
+9,Purpose of data clear
+10,Sufficient data for the use case
+11,Evaluation steps clear
+12,Data acquisition over time
 13,Data secured
 14,Risk free sharing
 15,Allowed to share
