@@ -2,8 +2,8 @@
 
 Visualization methods for the responses provided to the questions used to assess the data readiness of applied
 machine learning projects. The method is modeled on the notion of Data Readiness Levels introduced by 
-([Lawrence, (2017)](https://arxiv.org/abs/1705.02245), and elaborated on in the context of Natural Language
-Processing by [Olsson & Sahlgren, (2020)](https://arxiv.org/abs/2009.02043))
+[Lawrence, (2017)](https://arxiv.org/abs/1705.02245), and elaborated on in the context of Natural Language
+Processing by [Olsson & Sahlgren, (2020)](https://arxiv.org/abs/2009.02043).
 
 ## Method
 
