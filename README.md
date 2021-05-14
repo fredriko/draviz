@@ -1,8 +1,11 @@
 # Visualizations of Data Readiness
 
-Experimental ground for visualizations suitable for the RISE SMEDAT project. For the purpose of illustration, we
-will use questions related to Data Readiness ([Lawrence, (2017)](https://arxiv.org/abs/1705.02245), 
-[Olsson & Sahlgren, (2020)](https://arxiv.org/abs/2009.02043)) in this repository.
+Visualization methods for the responses provided to the questions used to assess the data readiness of applied
+machine learning projects. The method is modeled on the notion of Data Readiness Levels introduced by 
+([Lawrence, (2017)](https://arxiv.org/abs/1705.02245), and elaborated on in the context of Natural Language
+Processing by [Olsson & Sahlgren, (2020)](https://arxiv.org/abs/2009.02043))
+
+## Method
 
 
 ## Questions
@@ -26,7 +29,7 @@ The following questions are used for illustrative purposes. All questions should
 1. Band A - Is it free of risk for you to share your refined data with others (wrt business)?
 1. Band A - Are you allowed to share your refined data wrt to, e.g., licensing, PII etc?
 
-## Mock data
+### Mock data
 
 The file [data.csv](data/data.csv) contains made-up answers for two fake companies, to be used for the example 
 visualizations.
@@ -57,4 +60,4 @@ Here is an example of a parallel plot based on the same data
 
 ## TODO
 
-* Weigh questions differently, depending on how important they are (or where in the process the current project is).
+* Bring parallel coordinate plots up to speed with the radar charts.
