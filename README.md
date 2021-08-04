@@ -63,20 +63,16 @@ The [comparison image](images/drl-assesment-cmp.png):
 draviz -q data/questions_en.csv -a data/dummy_answers.csv -p "Phase one,Phase two"
 ```
 
-
-
-The file [dummy_answers.csv](data/dummy_answers.csv) contains made-up answers for two fake companies, to be used for the example 
-visualizations.
-
 ### Use your own answers
 
 When providing your own answers to the questions on data readiness, you have to alter the three
-columns named `Phases`, `Answer`, and `Applicable` of the [answer](data/dummy_answers.csv) file. 
+columns named `Phases`, `Answer`, and `Applicable` in the [answers](data/dummy_answers.csv) file. 
 
-* You can define one or more named phases by adding the corresponding name in the `Phases` column. 
+* You can define one or more named phases by adding the corresponding name in the `Phases` column.
 * The values in the`Answer` column should be one of the following 0 (**Don't know**), 1 (**No**), 2 (**Partially**), or 
-  3 (**Yes**) for the question with the corresponding id in the [question](data/questions_en.csv) file.
-* If one of the questions are not applicable in your case, set the corresponding row in the `Applicable` column to `False`.
+  3 (**Yes**) for the question with the corresponding id in the [questions](data/questions_en.csv) file.
+* If one of the questions are not applicable in your case, set the corresponding cell in the `Applicable` column 
+  to `False`.
 
 See the description of the assessment method below for more information about the questions.
 
@@ -287,6 +283,11 @@ that data should not be share with external parties.
 ![The figure shows the contents of Figure 1 and Figure 2 in the same radar chart](images/drl-assesment-cmp.png)
 **Figure 3:** The figure shows a comparison of the contents of Figure 1 and Figure 2 in the same
 radar chart.
+
+## Contribute
+
+We'd be happy to take feedback on the method itself, as well as contributions to the code. Get in touch at
+`fredrik.olsson AT gmail.com` or submit an issue or pull request to this repository.
 
 
 
