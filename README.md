@@ -16,7 +16,7 @@ python setup.py install
 
 `draviz` is a commandline tool that takes the following arguments:
 
-```bash
+```txt
 usage: draviz [-h] -q QUESTIONS -a ANSWERS [-l {en,sv}] -p PHASES
 
 This program generates radar charts for displaying the answers to questions about data readiness.
@@ -30,18 +30,55 @@ optional arguments:
   -l {en,sv}, --language {en,sv}
                         ISO 639-1 code of the language used for marking labelling the axes in the radar chart.
   -p PHASES, --phases PHASES
-                        A comma separated list of the phases to include in the radar chart. The phases available depend on the values in the 'Phases' column of the file answer file specified.
+                        A comma separated list of the phases to include in the radar chart. The phases available depend 
+                        on the values in the 'Phases' column of the file answer file specified.
 ```
+
+See the provided [question](data/questions_en.csv) and [answer](data/dummy_answers.csv) files for examples of how
+those file should be structured.
 
 Upon successful completion, `draviz` opens a web browser with the generated radar chart. From the browser, you can 
 download the chart on the form of a png file.
 
 ### How to reproduce the radar charts
 
+Here's how you reproduce the radar charts shown in the section below (also available in the [images](images/) 
+directory).
+
+Type the following in a terminal to generate the [first image](images/drl-assessment-stage-1.png):
+
+```bash
+draviz -q data/questions_en.csv -a data/dummy_answers.csv -p "Phase one"
+```
+
+The [second image](images/drl-assessment-stage-2.png):
+
+```bash
+draviz -q data/questions_en.csv -a data/dummy_answers.csv -p "Phase two"
+```
+
+The [comparison image](images/drl-assesment-cmp.png):
+
+```bash
+draviz -q data/questions_en.csv -a data/dummy_answers.csv -p "Phase one,Phase two"
+```
+
+
+
 The file [dummy_answers.csv](data/dummy_answers.csv) contains made-up answers for two fake companies, to be used for the example 
 visualizations.
 
 ### Use your own answers
+
+When providing your own answers to the questions on data readiness, you have to alter the three
+columns named `Phases`, `Answer`, and `Applicable` of the [answer](data/dummy_answers.csv) file. 
+
+* You can define one or more named phases by adding the corresponding name in the `Phases` column. 
+* The values in the`Answer` column should be one of the following 0 (**Don't know**), 1 (**No**), 2 (**Partially**), or 
+  3 (**Yes**) for the question with the corresponding id in the [question](data/questions_en.csv) file.
+* If one of the questions are not applicable in your case, set the corresponding row in the `Applicable` column to `False`.
+
+See the description of the assessment method below for more information about the questions.
 
 ***
 
