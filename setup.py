@@ -1,5 +1,8 @@
 from setuptools import setup
 
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
 setup(
     name="draviz",
     version="0.1",
@@ -11,5 +14,6 @@ setup(
     description="A program for visualizing the data readiness of NLP projects.",
     install_requires=["pandas", "plotly"],
     python_requires=">=3.6",
-    entry_points={"console_scripts": ["draviz=src.draviz:main"]}
+    entry_points={"console_scripts": ["draviz=src.draviz:main"]},
+    long_description=long_description
 )
