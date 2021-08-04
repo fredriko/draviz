@@ -1,16 +1,41 @@
-# TODO
-
-1. README.
-1. Code - make it a commandline tool.
-1. Package as a pip install package.
-
 # A tool for visualizing data readiness for NLP
+
 **TL;DR:** This repository contains a description of a method for assessing the data readiness of natural language 
 processing (NLP) projects, as well as the code necessary for visualizing the outcome of the method.
 
 ## Installation
+This program requires you to have python (version > 3.6) and git installed on you computer. Clone this repository and install the `draviz` program by giving the following commands in a terminal:
+
+```bash
+git clone https://github.com/fredriko/draviz.git
+cd draviz
+python setup.py install
+```
 
 ## Usage
+
+`draviz` is a commandline tool that takes the following arguments:
+
+```bash
+usage: draviz [-h] -q QUESTIONS -a ANSWERS [-l {en,sv}] -p PHASES
+
+This program generates radar charts for displaying the answers to questions about data readiness.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -q QUESTIONS, --questions QUESTIONS
+                        A CSV file containing the questions about data readiness.
+  -a ANSWERS, --answers ANSWERS
+                        A CSV file containing the answers to the questions about data readiness.
+  -l {en,sv}, --language {en,sv}
+                        ISO 639-1 code of the language used for marking labelling the axes in the radar chart.
+  -p PHASES, --phases PHASES
+                        A comma separated list of the phases to include in the radar chart. The phases available depend on the values in the 'Phases' column of the file answer file specified.
+```
+
+Upon successful completion, `draviz` opens a web browser with the generated radar chart. From the browser, you can 
+download the chart on the form of a png file.
+
 ### How to reproduce the radar charts
 
 The file [dummy_answers.csv](data/dummy_answers.csv) contains made-up answers for two fake companies, to be used for the example 
