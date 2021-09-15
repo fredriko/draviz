@@ -1,7 +1,7 @@
 # draviz - A tool for visualizing data readiness for NLP projects
 
-**TL;DR:** This repository contains a description of a method for assessing the data readiness of natural language 
-processing (NLP) projects, as well as the code necessary for visualizing the outcome of the method.
+**TL;DR:** This repository contains a description of a **method for assessing the data readiness** of natural language 
+processing (NLP) projects, as well as the **code for visualizing the outcome** of the method.
 
 ![The figure is a radar chart showing the visual comparison of two assessments of data readiness for a fictitious project.](images/drl-assesment-cmp.png)
 **Example visualisation:** The figure is a radar chart showing the visual comparison of two assessments of data readiness for a fictitious project. Read about the assessment method below.
