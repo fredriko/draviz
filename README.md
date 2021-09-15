@@ -3,6 +3,9 @@
 **TL;DR:** This repository contains a description of a method for assessing the data readiness of natural language 
 processing (NLP) projects, as well as the code necessary for visualizing the outcome of the method.
 
+![The figure is a radar chart showing the visual comparison of two assessments of data readiness for a fictitious project.](images/drl-assesment-cmp.png)
+**Example visualisation:** The figure is a radar chart showing the visual comparison of two assessments of data readiness for a fictitious project. Read about the assessment method below.
+
 ## Installation
 This program requires you to have python (version > 3.6) and git installed on you computer. Clone this repository and install the `draviz` program by giving the following commands in a terminal:
 
