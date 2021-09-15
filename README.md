@@ -252,7 +252,7 @@ validated; there is not sufficient data for the use case; and the way to evaluat
 to be defined. On the bright side, the stakeholder partially agrees on the objective of the project, and the purpose 
 of the data.
 
-###Second application of the method
+### Second application of the method
 
 Fast forward to the second data readiness assessment of _Project_. In this case, it is scheduled to take place prior 
 to the project embarking on the first rounds of empirical investigations of the state of data in relation to the 
