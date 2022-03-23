@@ -134,3 +134,6 @@ dmypy.json
 # IDE project files
 *.prj
 *.pui
+
+# backup files
+src/draviz_app.py.bak
