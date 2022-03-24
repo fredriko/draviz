@@ -1,22 +1,19 @@
-
-import streamlit as st
-import pandas as pd
-import numpy as np
 from collections import OrderedDict
-from typing import List, Dict, Tuple
+from typing import Dict
+
 import plotly.graph_objects as go
+import streamlit as st
 
 
 def create_plot(answers: Dict[str, int], answer_dict: Dict[int, str]) -> None:
-
     fig = go.Figure()
 
     fig.add_trace(go.Scatterpolar(
-        r=[v for k,v in answers.items() if v != 4],
-        theta=[k for k,v in answers.items() if v != 4],
+        r=[v for k, v in answers.items() if v != 4],
+        theta=[k for k, v in answers.items() if v != 4],
         fill="toself",
-        #name=phase,
-        text=[k for k,v in answers.items() if v != 4],
+        # name=phase,
+        text=[k for k, v in answers.items() if v != 4],
         hoverinfo="text"
     ))
 
@@ -40,17 +37,15 @@ def create_plot(answers: Dict[str, int], answer_dict: Dict[int, str]) -> None:
     st.plotly_chart(fig)
 
 
-
 def main():
     st.title("Data Readiness Assessment")
-    
-    langs : Dict[str, str] = {
+
+    langs: Dict[str, str] = {
         'English': 'en',
         'Svenska': 'sv'
     }
     lang_select = st.selectbox('Please choose language', list(langs.keys()))
     language = langs[lang_select]
-
 
     dd = OrderedDict()
     if language == "en":
@@ -59,7 +54,7 @@ def main():
             1: "No",
             2: "Partially",
             3: "Yes",
-            4: "Not relevant"        
+            4: "Not relevant"
         }
     else:
         dd: Dict[int, str] = {
@@ -67,9 +62,9 @@ def main():
             1: "Nej",
             2: "Delvis",
             3: "Ja",
-            4: "Inte relevant"        
+            4: "Inte relevant"
         }
-    
+
     qq = OrderedDict()
     if language == "en":
         qq: Dict[str, str] = {
@@ -111,9 +106,10 @@ def main():
     answers = OrderedDict()
     for (k, v) in qq.items():
         ans_val = st.radio(v, dd.values())
-        answers[k] = [k for k,v in dd.items() if v == ans_val][0]
+        answers[k] = [k for k, v in dd.items() if v == ans_val][0]
 
     create_plot(answers, dd)
+
 
 if __name__ == "__main__":
     main()

@@ -7,15 +7,15 @@ in the pre-print: [We Need to Talk About Data: The Importance of Data Readiness 
 ![The figure is a radar chart showing the visual comparison of two assessments of data readiness for a fictitious project.](images/drl-assesment-cmp.png)
 **Example visualisation:** The figure is a radar chart showing the visual comparison of two assessments of data readiness for a fictitious project. Read about the assessment method below.
 
-## Information about this fork
-This fork includes a prototype `streamlit` module for interactive construction of the visualisation. Run it via 
-```bash
-streamlit run draviz_app.py
-```
-inside the `src` folder. Note that only one phase is currently supported.
 
 ## Installation
-This program requires you to have python (version > 3.6) and git installed on you computer. Clone this repository and install the `draviz` program by giving the following commands in a terminal:
+There are two ways of invoking `draviz`: via the command line or as a streamlit app.
+
+This program requires you to have python (version > 3.6) and git installed on you computer. 
+
+### Installation for use on the command line
+
+Clone this repository and install the `draviz` program by giving the following commands in a terminal:
 
 ```bash
 git clone https://github.com/fredriko/draviz.git
@@ -23,7 +23,26 @@ cd draviz
 python setup.py install
 ```
 
-## Usage
+### Installation for use as a streamlit app
+
+In addition to python and git, you will need virtualenv to install the requirements of draviz in a virtual python
+environment (highly encouraged). In a terminal, issue the following commands for setting up the virtual environment:
+
+```bash
+mkdir ~/venv
+virtualenv -p python3 ~/venv/draviz
+source ~/venv/draviz/bin/activate
+```
+
+Install the draviz requirements by giving the following commands:
+
+```bash
+git clone https://github.com/fredriko/draviz.git
+cd draviz
+pip install -r requirements.txt
+```
+
+## Command line usage
 
 `draviz` is a commandline tool that takes the following arguments:
 
@@ -86,6 +105,18 @@ columns named `Phases`, `Answer`, and `Applicable` in the [answers](data/dummy_a
   to `False`.
 
 See the description of the assessment method below for more information about the questions.
+
+## Use as a streamlit app
+
+This version includes a prototype streamlit module for interactive construction of the visualisation. Run it from the
+command line via
+
+```bash
+cd src/
+streamlit run draviz_app.py
+```
+
+Note that only one phase is currently supported.
 
 ***
 
