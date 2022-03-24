@@ -7,6 +7,13 @@ in the pre-print: [We Need to Talk About Data: The Importance of Data Readiness 
 ![The figure is a radar chart showing the visual comparison of two assessments of data readiness for a fictitious project.](images/drl-assesment-cmp.png)
 **Example visualisation:** The figure is a radar chart showing the visual comparison of two assessments of data readiness for a fictitious project. Read about the assessment method below.
 
+## Information about this fork
+This fork includes a prototype `streamlit` module for interactive construction of the visualisation. Run it via 
+```bash
+streamlit run draviz_app.py
+```
+inside the `src` folder. Note that only one phase is currently supported.
+
 ## Installation
 This program requires you to have python (version > 3.6) and git installed on you computer. Clone this repository and install the `draviz` program by giving the following commands in a terminal:
 

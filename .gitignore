@@ -130,3 +130,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# IDE project files
+*.prj
+*.pui
+
+# backup files
+src/draviz_app.py.bak
