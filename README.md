@@ -112,8 +112,8 @@ This version includes a prototype streamlit module for interactive construction 
 command line via
 
 ```bash
-cd src/
-streamlit run draviz_app.py
+cd draviz
+streamlit run src/draviz_app.py
 ```
 
 Note that only one phase is currently supported.
