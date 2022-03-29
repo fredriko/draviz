@@ -53,7 +53,7 @@ def main() -> None:
         'English': 'en',
         'Svenska': 'sv'
     }
-    lang_select = st.selectbox('Select language for the answers', list(langs.keys()))
+    lang_select = st.selectbox('Select language', list(langs.keys()))
     language = langs[lang_select]
 
     dd = OrderedDict()
@@ -74,7 +74,13 @@ def main() -> None:
             4: "Inte relevant"
         }
 
-    input_file = st.file_uploader("Upload csv file with questions", type="csv")
+    mode = st.selectbox("Select source of questions", ["User-specified questions", "Default questions"])
+
+    if mode == "User-specified questions":
+        input_file = st.file_uploader("Upload csv file with questions", type="csv")
+    else:
+        input_file = "data/defaultq_%s.csv" % language
+
     if input_file is not None:
         qq = pd.read_csv(input_file)
         try:
@@ -82,7 +88,6 @@ def main() -> None:
             create_plot(answers, dd)
         except KeyError:
             st.write("Not a valid question file. Expected the columns question_id, shorthand, question_text. Instead got %s." % ", ".join(qq.columns))
-
 
 if __name__ == "__main__":
     main()
