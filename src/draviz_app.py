@@ -74,12 +74,21 @@ def main() -> None:
             4: "Inte relevant"
         }
 
-    mode = st.selectbox("Select source of questions", ["User-specified questions", "Default questions"])
+    q_options: Dict[int, str] = {
+        0: "None", 
+        1: "Default questions", 
+        2: "User-specified questions"
+    }
+    q_mode = st.selectbox("Select source of questions", q_options.values())
 
-    if mode == "User-specified questions":
-        input_file = st.file_uploader("Upload csv file with questions", type="csv")
-    else:
+    mode = [k for k,v in q_options.items() if v == q_mode][0]
+
+    if mode == 0:
+        input_file = None
+    elif mode == 1:
         input_file = "data/defaultq_%s.csv" % language
+    elif mode == 2:
+        input_file = st.file_uploader("Upload csv file with questions", type="csv")
 
     if input_file is not None:
         qq = pd.read_csv(input_file)
