@@ -3,6 +3,7 @@ from typing import Dict
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
+from st_btn_select import st_btn_select
 
 
 def create_plot(answers: Dict[str, int], answer_dict: Dict[int, str]) -> None:
@@ -47,17 +48,18 @@ def print_questions(questions: pd.DataFrame, answer_dict: Dict[int, str]) -> Dic
 
 
 def main() -> None:
-    st.title("Data Readiness Assessment")
 
     langs: Dict[str, str] = {
         'English': 'en',
         'Svenska': 'sv'
     }
-    lang_select = st.selectbox('Select language', list(langs.keys()))
+
+    lang_select = st_btn_select(list(langs.keys()))
     language = langs[lang_select]
 
     dd = OrderedDict()
     if language == "en":
+        title = "Data Readiness Assessment"
         dd: Dict[int, str] = {
             0: "Don't know",
             1: "No",
@@ -65,7 +67,17 @@ def main() -> None:
             3: "Yes",
             4: "Not relevant"
         }
-    else:
+
+        q_options: Dict[int, str] = {
+            0: "None", 
+            1: "Default questions", 
+            2: "User-specified questions"
+        }
+        q_prompt = "Select source of questions"
+        upload_prompt = "Upload csv file with questions"
+
+    elif language == "sv":
+        title = "Bedömning av databeredskap"
         dd: Dict[int, str] = {
             0: "Vet inte",
             1: "Nej",
@@ -73,13 +85,17 @@ def main() -> None:
             3: "Ja",
             4: "Inte relevant"
         }
-
-    q_options: Dict[int, str] = {
-        0: "None", 
-        1: "Default questions", 
-        2: "User-specified questions"
-    }
-    q_mode = st.selectbox("Select source of questions", q_options.values())
+        
+        q_options: Dict[int, str] = {
+            0: "None", 
+            1: "Standardfrågor", 
+            2: "Egna frågor"
+        }
+        q_prompt = "Välj källa till frågor"
+        upload_prompt = "Ladda upp csv-fil med frågor"
+    
+    st.title(title)
+    q_mode = st.selectbox(q_prompt, q_options.values())
 
     mode = [k for k,v in q_options.items() if v == q_mode][0]
 
@@ -88,7 +104,7 @@ def main() -> None:
     elif mode == 1:
         input_file = "data/defaultq_%s.csv" % language
     elif mode == 2:
-        input_file = st.file_uploader("Upload csv file with questions", type="csv")
+        input_file = st.file_uploader(upload_prompt, type="csv")
 
     if input_file is not None:
         qq = pd.read_csv(input_file)
@@ -96,7 +112,7 @@ def main() -> None:
             answers = print_questions(qq, dd)
             create_plot(answers, dd)
         except KeyError:
-            st.write("Not a valid question file. Expected the columns question_id, shorthand, question_text. Instead got %s." % ", ".join(qq.columns))
+            st.write("Not a valid question file. Expected columns question_id, shorthand, question_text. Instead got %s." % ", ".join(qq.columns))
 
 if __name__ == "__main__":
     main()
