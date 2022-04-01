@@ -97,7 +97,7 @@ def read_data(questions_file: Path, answers_file: Path, company: str = None, lan
             2: "Delvis",
             3: "Ja"
         }
-    df["Answer_text"] = df["Answer"].apply(lambda x: dd.get(x, "Undefined"))
+    df["Answer_text"] = df["Answer"].apply(lambda x: dd.get(int(x), "Undefined"))
     return df, list(dd.values())
 
 
