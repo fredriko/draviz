@@ -50,7 +50,8 @@ def create_radar_plot(questions_file: Path, answers_file: Path, phases: List[str
                 tickmode="array",
                 tickvals=[0, 1, 2, 3],
                 ticktext=answers_list,
-                range=[0, 3]
+                range=[0, 3],
+                categoryorder="category ascending"
             ),
             angularaxis=dict(
                 direction="clockwise"
