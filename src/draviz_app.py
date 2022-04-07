@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from typing import Dict
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
@@ -25,7 +26,8 @@ def create_plot(answers: Dict[str, int], answer_dict: Dict[int, str]) -> None:
                 tickmode="array",
                 tickvals=[0, 1, 2, 3],
                 ticktext=list(answer_dict.values()),
-                range=[0, 3]
+                range=[0, 3],
+                categoryorder="category ascending"
             ),
             angularaxis=dict(
                 direction="clockwise"
@@ -37,6 +39,7 @@ def create_plot(answers: Dict[str, int], answer_dict: Dict[int, str]) -> None:
 
     st.plotly_chart(fig)
 
+
 def print_questions(questions: pd.DataFrame, answer_dict: Dict[int, str]) -> Dict[str, int]:
     answers = OrderedDict()
     for i in range(len(questions)):
@@ -44,11 +47,10 @@ def print_questions(questions: pd.DataFrame, answer_dict: Dict[int, str]) -> Dic
         qshort = "%i. %s" % (questions["question_id"][i], questions["shorthand"][i])
         ans_val = st.radio(qstring, answer_dict.values())
         answers[qshort] = [k for k, v in answer_dict.items() if v == ans_val][0]
-    return(answers)
+    return answers
 
 
 def main() -> None:
-
     langs: Dict[str, str] = {
         'English': 'en',
         'Svenska': 'sv'
@@ -69,8 +71,8 @@ def main() -> None:
         }
 
         q_options: Dict[int, str] = {
-            0: "None", 
-            1: "Default questions", 
+            0: "None",
+            1: "Default questions",
             2: "User-specified questions"
         }
         q_prompt = "Select source of questions"
@@ -85,19 +87,21 @@ def main() -> None:
             3: "Ja",
             4: "Inte relevant"
         }
-        
+
         q_options: Dict[int, str] = {
-            0: "None", 
-            1: "Standardfrågor", 
+            0: "None",
+            1: "Standardfrågor",
             2: "Egna frågor"
         }
         q_prompt = "Välj källa till frågor"
         upload_prompt = "Ladda upp csv-fil med frågor"
-    
+    else:
+        raise RuntimeError(f"Unknown language: '{language}'")
+
     st.title(title)
     q_mode = st.selectbox(q_prompt, q_options.values())
 
-    mode = [k for k,v in q_options.items() if v == q_mode][0]
+    mode = [k for k, v in q_options.items() if v == q_mode][0]
 
     if mode == 0:
         input_file = None
@@ -112,7 +116,10 @@ def main() -> None:
             answers = print_questions(qq, dd)
             create_plot(answers, dd)
         except KeyError:
-            st.write("Not a valid question file. Expected columns question_id, shorthand, question_text. Instead got %s." % ", ".join(qq.columns))
+            st.write(
+                "Not a valid question file. Expected columns question_id, shorthand, question_text. Instead got %s." % ", ".join(
+                    qq.columns))
+
 
 if __name__ == "__main__":
     main()
